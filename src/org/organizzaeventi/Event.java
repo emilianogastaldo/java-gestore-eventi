@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-public class Event {
+public class Event implements Comparable<Event> {
 // ATTRIBUTI
     private String title;
     private LocalDate date;
@@ -101,5 +101,19 @@ public class Event {
     public String toString(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.ITALIAN);
         return String.format(date.format(formatter) + " - "+ title);
+    }
+
+    @Override
+//    Per oggetti custom devo dare l'override della funzione compare o compareTo (seconda più semplice)
+//    Deve ridare degli interi per forma, ma posso usare i compare to delle altre classi (come il LocalDate in questo caso
+//    Altra cosa importante: aggiungere implements Comparable<CustomObject> per poter fare tutto ciò.
+//    Al posto di CustomObject mettere la classe che ho creato, in questo caso ho messo Event.
+    public int compareTo(Event o) {
+        if(o == null) return 1;
+        if(getDate().isEqual(o.getDate())){
+            return getTitle().compareTo(o.getTitle());
+        }else {
+            return getDate().compareTo(o.getDate());
+        }
     }
 }

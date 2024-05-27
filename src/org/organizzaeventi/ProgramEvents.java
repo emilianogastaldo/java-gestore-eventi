@@ -4,6 +4,8 @@ import org.organizzaeventi.exceptions.InvalidTitleException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class ProgramEvents {
@@ -60,5 +62,14 @@ public class ProgramEvents {
 //  Metodo per svuotare la lista eventi
     public void deleteAll(){
         this.events.clear();
+    }
+
+    public String toString(){
+        Collections.sort(events);
+        String message = "";
+        for(Event e : this.events){
+            message += e.getDate() +" - " + e.getTitle() + "\n";
+        }
+        return message;
     }
 }

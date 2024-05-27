@@ -27,6 +27,7 @@ public class MainProva {
 
         System.out.println(events.getEventsByDate(LocalDate.parse("2025-11-11")));
         System.out.println("Numero di eventi nel programma: " + events.getNumProgrammEvents());
+        System.out.println(events);
         /*events.deleteAll();
         System.out.println("Numero di eventi nel programma: " + events.getNumProgrammEvents());*/
     }

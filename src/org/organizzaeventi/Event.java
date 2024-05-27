@@ -1,6 +1,10 @@
-package organizzaeventi;
+package org.organizzaeventi;
 
-import java.time.DateTimeException;
+import org.organizzaeventi.exceptions.InvalidCapacityException;
+import org.organizzaeventi.exceptions.InvalidDateException;
+import org.organizzaeventi.exceptions.InvalidSeatsException;
+import org.organizzaeventi.exceptions.InvalidTitleException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -12,7 +16,7 @@ public class Event {
     private int capacity;
     private int numBooked;
 // COSTRUTTORI
-    Event(String title, LocalDate date, int capacity) throws InvalidTitleException, InvalidDateException, InvalidCapacityException{
+    Event(String title, LocalDate date, int capacity) throws InvalidTitleException, InvalidDateException, InvalidCapacityException {
         this.title = validateTitle(title);
         this.date = validateDate(date);
         this.capacity = validateCapacity(capacity);

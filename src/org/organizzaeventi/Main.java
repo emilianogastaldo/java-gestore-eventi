@@ -1,4 +1,4 @@
-package organizzaeventi;
+package org.organizzaeventi;
 
 public class Main {
     public static void main(String[] args) {

@@ -16,7 +16,7 @@ public class MainProva {
         /*System.out.println(concerto6.getFormattedDate());
         System.out.println(concerto6.getFormattedPrice());
         System.out.println(concerto6);*/
-        ProgrammEventi events = new ProgrammEventi("Prove pippo");
+        ProgramEvents events = new ProgramEvents("Prove pippo");
         events.addEvent(concerto0);
         events.addEvent(concerto1);
         events.addEvent(concerto2);
@@ -26,5 +26,8 @@ public class MainProva {
         events.addEvent(concerto6);
 
         System.out.println(events.getEventsByDate(LocalDate.parse("2025-11-11")));
+        System.out.println("Numero di eventi nel programma: " + events.getNumProgrammEvents());
+        /*events.deleteAll();
+        System.out.println("Numero di eventi nel programma: " + events.getNumProgrammEvents());*/
     }
 }

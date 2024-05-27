@@ -6,12 +6,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProgrammEventi {
+public class ProgramEvents {
 //  ATTRIBUTI
     private String title;
     private List<Event> events;
 //  COSTRUTTORI
-    public ProgrammEventi(String title) {
+    public ProgramEvents(String title) {
         this.title = validateTitle(title);
         this.events = new ArrayList<>();
     }
@@ -52,5 +52,13 @@ public class ProgrammEventi {
             }
         }
         return message;
+    }
+//  Metodo che restituisce quanti eventi ci sono in programma
+    public int getNumProgrammEvents(){
+        return this.events.size();
+    }
+//  Metodo per svuotare la lista eventi
+    public void deleteAll(){
+        this.events.clear();
     }
 }

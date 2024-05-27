@@ -42,7 +42,23 @@ public class Event {
         this.date = validateDate(date);
     }
 // Metodi della milestone
+//    Metodo prenota
+    public void bookSeat(int num){
+        if(num <= 0){
+            throw new InvalidBookSeatsException("Reserved seats can't be equal or less to zero");
+        }
+        if(num + numBooked > capacity){
+            throw new InvalidBookSeatsException("There are only " + (capacity - numBooked) +" tickets left. You tried to book "+num+" tickets");
+        }
+        if(numBooked == capacity){
+            throw new InvalidBookSeatsException("There aren't any seats left");
+        }
+        this.numBooked += num;
+    }
+//    Metodo disdici
+    public void cancelSeat(int num){
 
+    }
     //    Metodi di controllo
     private LocalDate validateDate (LocalDate date) throws InvalidDateException{
         if(date==null||date.isBefore(LocalDate.now())) {

@@ -50,46 +50,49 @@ public class Event {
     }
 // Metodi della milestone
 //    Metodo prenota
-    public void bookSeat(int num){
+    public void bookSeat(int num) throws InvalidSeatsException, InvalidDateException{
         if(num <= 0){
-            throw new InvalidSeatsException("Reserved seats can't be equal or less to zero");
+            throw new InvalidSeatsException("I posti che vuoi prenotare non possono essere uguali o inferiori a zero.");
         }
         if(num + numBooked > capacity){
-            throw new InvalidSeatsException("There are only " + (capacity - numBooked) +" tickets left. You tried to book "+num+" tickets");
+            throw new InvalidSeatsException("Sono rimasti " + (capacity - numBooked) +" biglietti. Hai provato a prenotare "+num+" biglietti.");
         }
-        if(numBooked == capacity){
-            throw new InvalidSeatsException("There aren't any seats left");
+        if(this.date.isBefore(LocalDate.now())){
+            throw new InvalidDateException("L'evento è scaduto");
         }
         this.numBooked += num;
     }
 //    Metodo disdici
-    public void cancelSeat(int num){
+    public void cancelSeat(int num) throws InvalidSeatsException, InvalidDateException{
         if(num <= 0){
-            throw new InvalidSeatsException("Cancel seats can't be equal or less to zero");
+            throw new InvalidSeatsException("I posti che vuoi disdire non possono essere uguali o inferiori a zero.");
         }
         if(numBooked - num < 0){
-            throw new InvalidSeatsException("Tre are only " + numBooked + " seats reserved. You can't cancel "+num+" seats.");
+            throw new InvalidSeatsException("Ci sono " + numBooked + " posti prenotati. Non puoi cancellare "+num+" posti.");
+        }
+        if(this.date.isBefore(LocalDate.now())){
+            throw new InvalidDateException("L'evento è scaduto");
         }
         this.numBooked -= num;
     }
     //    Metodi di controllo
     private LocalDate validateDate (LocalDate date) throws InvalidDateException{
         if(date==null||date.isBefore(LocalDate.now())) {
-            throw new InvalidDateException("Invalid date: " + date);
+            throw new InvalidDateException("La data inserita " + date +" non può essere antecedente a quella odierna "+LocalDate.now());
         }
         return date;
     }
 
     private int validateCapacity (int num) throws InvalidCapacityException{
         if (num <=0 ){
-            throw new InvalidCapacityException("Capacity can't be less or equal to zero");
+            throw new InvalidCapacityException("La capacità dell'evento non può essere uguale o inferiore a zero.");
         }
         return num;
     }
 
     private String validateTitle (String title) throws InvalidTitleException{
         if(title == null || title.isEmpty() || title.equals(" ")){
-            throw new InvalidTitleException("The title cannot be null or empty");
+            throw new InvalidTitleException("L'evento deve avere un titolo");
         }
         return title;
     }

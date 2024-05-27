@@ -1,6 +1,9 @@
 package organizzaeventi;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class Event {
 // ATTRIBUTI
@@ -45,19 +48,25 @@ public class Event {
 //    Metodo prenota
     public void bookSeat(int num){
         if(num <= 0){
-            throw new InvalidBookSeatsException("Reserved seats can't be equal or less to zero");
+            throw new InvalidSeatsException("Reserved seats can't be equal or less to zero");
         }
         if(num + numBooked > capacity){
-            throw new InvalidBookSeatsException("There are only " + (capacity - numBooked) +" tickets left. You tried to book "+num+" tickets");
+            throw new InvalidSeatsException("There are only " + (capacity - numBooked) +" tickets left. You tried to book "+num+" tickets");
         }
         if(numBooked == capacity){
-            throw new InvalidBookSeatsException("There aren't any seats left");
+            throw new InvalidSeatsException("There aren't any seats left");
         }
         this.numBooked += num;
     }
 //    Metodo disdici
     public void cancelSeat(int num){
-
+        if(num <= 0){
+            throw new InvalidSeatsException("Cancel seats can't be equal or less to zero");
+        }
+        if(numBooked - num < 0){
+            throw new InvalidSeatsException("Tre are only " + numBooked + " seats reserved. You can't cancel "+num+" seats.");
+        }
+        this.numBooked -= num;
     }
     //    Metodi di controllo
     private LocalDate validateDate (LocalDate date) throws InvalidDateException{
@@ -79,5 +88,11 @@ public class Event {
             throw new InvalidTitleException("The title cannot be null or empty");
         }
         return title;
+    }
+//    Metodi override
+    @Override
+    public String toString(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.ITALIAN);
+        return String.format(date.format(formatter) + " - "+ title);
     }
 }

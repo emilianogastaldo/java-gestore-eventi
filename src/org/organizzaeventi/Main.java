@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Ciao crea un nuovo evento! ");
+        System.out.println("Ciao crea un nuovo programma di eventi! ");
         Event event = null;
         while (event == null){
             try{

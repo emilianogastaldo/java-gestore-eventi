@@ -1,5 +1,6 @@
 package org.organizzaeventi;
 
+import org.organizzaeventi.exceptions.InvalidEventException;
 import org.organizzaeventi.exceptions.InvalidTitleException;
 
 import java.time.LocalDate;
@@ -43,6 +44,7 @@ public class ProgramEvents {
     }
 //  Metodo per aggiungere un evento
     public void addEvent(Event e){
+        if (e == null) throw new InvalidEventException("L'evento non può essere nullo");
         this.events.add(e);
     }
 //  Metodo per la lista di eventi in una certa data
